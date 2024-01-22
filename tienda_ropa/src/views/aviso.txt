@@ -1,0 +1,1 @@
+poner en esta carpeta las vistas, para visualizarolos durante su construccion importar en App.vue, una ves este listo quitar la importacion
