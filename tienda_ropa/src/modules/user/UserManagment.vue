@@ -54,15 +54,9 @@
                                         </b-col>
                                         <b-col cols="auto">
                                             <b-badge
-                                                variant="success"
-                                                class="mb-1"
-                                                v-if="user.status === 'habilidato'"
-                                            >
-                                            </b-badge>
-                                            <b-badge
                                                 variant="danger"
                                                 class="mb-1"
-                                                v-else
+                                                v-if="user.status !== 'habilidato'"
                                             >
                                                 Desabilitado
                                             </b-badge>
