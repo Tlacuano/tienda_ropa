@@ -4,6 +4,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'App',
   components: {
+    
   },
 })
 </script>
@@ -11,6 +12,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
+      
     </b-container>
   </div>
 </template>
