@@ -16,12 +16,16 @@ Vue.use(IconsPlugin)
 //importacion de fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret , faPen, faTrash, faCircleUp, faCircleDown } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserSecret)
+library.add(faUserSecret, faPen, faTrash, faCircleUp, faCircleDown);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
+
+//importacion css global
+import './utils/main.css'
+
 
 new Vue({
   router,
