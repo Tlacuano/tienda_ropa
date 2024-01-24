@@ -1,9 +1,11 @@
 <script lang="ts">
 import Vue from 'vue'
+import Favorites from "@/views/Favorites.vue";
 
 export default Vue.extend({
   name: 'App',
   components: {
+    Favorites
   },
 })
 </script>
@@ -11,6 +13,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
+      <Favorites />
     </b-container>
   </div>
 </template>
