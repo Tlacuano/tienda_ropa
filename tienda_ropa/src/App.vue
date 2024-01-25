@@ -1,11 +1,11 @@
 <script lang="ts">
 import Vue from 'vue'
-import Favorites from "@/views/Favorites.vue";
+import ProductInformation from "@/views/ProductInformation.vue";
 
 export default Vue.extend({
   name: 'App',
   components: {
-    Favorites
+    ProductInformation
   },
 })
 </script>
@@ -13,7 +13,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
-      <Favorites />
+      <ProductInformation />
     </b-container>
   </div>
 </template>

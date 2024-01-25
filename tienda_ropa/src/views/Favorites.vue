@@ -40,7 +40,7 @@
                 </b-select>
               </b-col>
               <b-col cols="12">
-                <b-button variant="dark" block @click="handleProductClick(favoriteProduct)">Agregar al carrito
+                <b-button :disabled="!favoriteProduct.selectedSize" variant="dark" block @click="handleProductClick(favoriteProduct)">Agregar al carrito
                 </b-button>
               </b-col>
             </b-row>
@@ -71,9 +71,9 @@ export default {
           title: "Abrigo de lana",
           image: `https://picsum.photos/300/400?random=$${Math.floor(Math.random() * 100)}`,
           price: 59.99,
-          catalogue: "Otoño de tu Coño",
+          catalogue: "Otoño de Ensueño",
           color: "Negro",
-          availableSizes: ["S", "M", "L", "XL"],
+          availableSizes: ["S", "M", "XL"],
           selectedSize: null
         },
         {
@@ -81,9 +81,9 @@ export default {
           title: "Pantalón de pana",
           image: `https://picsum.photos/300/400?random=$${Math.floor(Math.random() * 100)}`,
           price: 25.99,
-          catalogue: "Otoño Follo",
+          catalogue: "Otoño Hoyo",
           color: "Beige",
-          availableSizes: ["S", "M", "L", "XL"],
+          availableSizes: ["M", "L", "XL"],
           selectedSize: null
         },
         {
@@ -91,7 +91,7 @@ export default {
           title: "Minifalda de Mezclilla",
           image: `https://picsum.photos/300/400?random=$${Math.floor(Math.random() * 100)}`,
           price: 15.99,
-          catalogue: "Verano Patuano",
+          catalogue: "Verano Urano",
           color: "Azul indigo",
           availableSizes: ["S", "M", "L", "XL"],
           selectedSize: null
@@ -101,9 +101,9 @@ export default {
           title: "Chamarra de cuero genuino",
           image: `https://picsum.photos/300/400?random=$${Math.floor(Math.random() * 100)}`,
           price: 79.99,
-          catalogue: "Invierno Tepongo Elcuerno",
+          catalogue: "Invierno Invernal",
           color: "Negro Carbón",
-          availableSizes: ["S", "M", "L", "XL"],
+          availableSizes: ["S", "M", "L"],
           selectedSize: null
         }
       ]
@@ -113,7 +113,7 @@ export default {
   methods: {
     handleProductClick(selectedProduct: any) {
       if (selectedProduct.selectedSize === null || selectedProduct.selectedSize === '') {
-
+        // TODO: Handle the product click
       }
     }
   }
@@ -160,7 +160,7 @@ export default {
 
 .product-price {
   font-weight: bold;
-  color: #3f0388;
+  color: #cc0000;
 }
 
 @media (max-width: 1200px) {
