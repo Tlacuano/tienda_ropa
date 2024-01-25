@@ -4,7 +4,6 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'App',
   components: {
-    CategoriesManagment: () => import('./modules/category/CategoriesManagment.vue'),
   },
 })
 </script>
@@ -12,7 +11,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
-          <CategoriesManagment />
+          
     </b-container>
   </div>
 </template>
