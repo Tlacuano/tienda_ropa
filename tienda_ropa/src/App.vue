@@ -4,7 +4,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'App',
   components: {
-    DepartamentsManagment : () => import('./modules/department/DepartmentsManagment.vue')
+    CategoriesManagment: () => import('./modules/category/CategoriesManagment.vue'),
   },
 })
 </script>
@@ -12,7 +12,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
-          <DepartamentsManagment />
+          <CategoriesManagment />
     </b-container>
   </div>
 </template>
