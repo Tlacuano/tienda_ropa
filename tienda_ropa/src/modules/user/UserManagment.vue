@@ -5,30 +5,21 @@
                 <h1>Usuarios</h1>
             </b-col>
         </b-row>
-        <b-row class="mt-4">
-            <b-col cols="5">
+        <b-row class="mt-4" align-h="between">
+            <b-col cols="12" lg="5">
                 <b-form-group >
                     <b-form-input id="search" type="text" placeholder="Ingrese su búsqueda"></b-form-input>
                 </b-form-group>
             </b-col>
-            <b-col cols="2" class="text-right">
-                <b-pagination
-                    v-model="currentPage"
-                    :total-rows="rows"
-                    :per-page="perPage"
-                    aria-controls="my-table"
-                    variant="outline-dark"
-                ></b-pagination>
-            </b-col>
-            <b-col cols="5" class="text-right">
-                <b-button v-b-modal.insertNewUser variant="outline-dark">Registrar cuenta</b-button>
+            <b-col cols="auto" class="text-right">
+                <b-button v-b-modal.insertNewUser variant="dark">Crear cuenta</b-button>
             </b-col>
         </b-row>
         <b-row class="my-3">
             <b-col cols="12">
                 <b-card  class="container-users">
-                    <section v-for="user in users" :key="user.id">
-                        <div class="mb-1 container-user">
+                    <section v-for="user in paginatedUsers" :key="user.id">
+                        <div class=" container-user">
                             <b-row no-gutters>
                                 <b-col lg="1" class="d-none d-lg-block">
                                     <b-img
@@ -48,26 +39,20 @@
                                 </b-col>
                                 <b-col lg="11">
                                     <b-row align-v="center" class="h-100">
-                                        <b-col>
-                                            <h5 class="mb-1">{{ user.name }}</h5>
+                                        <b-col  v-b-modal.UserDetailsModal >
+                                            <h5  class="mb-1">{{ user.name }}</h5>
                                             <p class="mb-1">{{ user.role }}</p>
                                         </b-col>
                                         <b-col cols="auto">
                                             <b-badge
-                                                variant="success"
-                                                class="mb-1"
-                                                v-if="user.status === 'habilidato'"
-                                            >
-                                            </b-badge>
-                                            <b-badge
                                                 variant="danger"
                                                 class="mb-1"
-                                                v-else
+                                                v-if="user.status !== 'habilidato'"
                                             >
                                                 Desabilitado
                                             </b-badge>
                                         </b-col>
-                                        <b-col cols="auto">
+                                        <b-col cols="auto" class="d-none d-md-block">
                                             <font-awesome-icon
                                                 v-b-tooltip.hover="'Deshabilitar'"
                                                 icon="circle-down"
@@ -93,7 +78,18 @@
                 </b-card>
             </b-col>
         </b-row> 
-        
+        <b-row>
+            <b-col>
+                <b-pagination
+                    v-model="currentPage"
+                    :total-rows="users.length"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+                    variant="dark"
+                ></b-pagination>
+            </b-col>
+        </b-row>
+        <UserDetailsModal />
         <InsertNewUser />
     </b-container>
 </template>
@@ -105,10 +101,11 @@ export default Vue.extend({
     name: 'UserManagment',
     components: {
         InsertNewUser: () => import('./InsertNewUserModal.vue'),
+        UserDetailsModal: () => import('./UserDetailsModal.vue'),
     },
     data() {
         return {
-            perPage: 5, // Número de elementos por página
+            perPage: 7, // Número de elementos por página
             currentPage: 1, // Página actual
             users: [
                 {
@@ -322,12 +319,19 @@ export default Vue.extend({
             }
         },
     },
+    computed: {
+        paginatedUsers() {
+            const startIndex = (this.currentPage - 1) * this.perPage;
+            const endIndex = startIndex + this.perPage;
+            return this.users.slice(startIndex, endIndex);
+        },
+    },
 })
 </script>
 
 <style>
     .container-users{
-        height: 75vh !important;
+        height: 68vh !important;
         overflow-y: scroll;
     }
 
@@ -335,7 +339,10 @@ export default Vue.extend({
         border: 1px solid #e2e2e2;
         border-radius: 5px;
         padding: 9px;
-        
+    }
+
+    .container-user:hover{
+        background-color: #f2f2f2;
     }
 </style>
 
