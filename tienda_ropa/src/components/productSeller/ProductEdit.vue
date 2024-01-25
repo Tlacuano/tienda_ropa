@@ -1,5 +1,5 @@
 <template>
-    <b-modal id="insertNewProduct" title="Registrar producto" size="xl" hide-footer centered>
+    <b-modal id="editProduct" title="Editar producto" size="xl" hide-footer centered>
         <div>
             <b-form>
                 <div class="row">
