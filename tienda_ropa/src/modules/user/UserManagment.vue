@@ -339,7 +339,10 @@ export default Vue.extend({
         border: 1px solid #e2e2e2;
         border-radius: 5px;
         padding: 9px;
-        
+    }
+
+    .container-user:hover{
+        background-color: #f2f2f2;
     }
 </style>
 

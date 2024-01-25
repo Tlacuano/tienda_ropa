@@ -149,7 +149,7 @@ export default Vue.extend({
     .container-department{
         border: 1px solid #e2e2e2;
         border-radius: 5px;
-        padding: 11px;
+        padding: 9px;
         
     }
 
