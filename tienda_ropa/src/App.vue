@@ -1,17 +1,9 @@
 <script lang="ts">
 import Vue from 'vue'
-import ProductInformation from "@/views/ProductInformation.vue";
-import Favorites from "@/views/Favorites.vue";
-import ShoppingCart from "@/views/ShoppingCart.vue";
-import LandingPage from "@/views/LandingPage.vue";
 
 export default Vue.extend({
   name: 'App',
   components: {
-    LandingPage,
-    ProductInformation,
-    Favorites,
-    ShoppingCart
   },
 })
 </script>
@@ -19,7 +11,6 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
-      <LandingPage />
     </b-container>
   </div>
 </template>
