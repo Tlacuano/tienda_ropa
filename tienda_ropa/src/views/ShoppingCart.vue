@@ -15,7 +15,7 @@
                 :img-alt="item.title"
                 img-left
                 tag="article"
-                class="mb-2"
+                class="mb-2 product-card"
             >
               <b-card-text>
                 <b-row>
@@ -225,11 +225,11 @@ export default {
   margin: 1rem 15rem;
 }
 
-.card {
+.product-card {
   transition: all 0.4s ease-in-out;
 }
 
-.card:hover {
+.product-card:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, .2);
   transform: scale(1.01);
 }
