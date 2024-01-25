@@ -10,7 +10,6 @@
     <b-row class="mt-4">
       <b-col>
         <h2>Productos en el Carrito</h2>
-
         <b-list-group>
           <b-list-group-item v-for="(product, index) in cartProducts" :key="index">
             {{ product.name }} - {{ product.price }} USD
