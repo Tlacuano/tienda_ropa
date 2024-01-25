@@ -4,7 +4,6 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'App',
   components: {
-    LandingPageProductManagement: () => import('@/views/LandingPageProductManagment.vue'),
   },
 })
 </script>
@@ -12,7 +11,6 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
-      <LandingPageProductManagement />
     </b-container>
   </div>
 </template>
