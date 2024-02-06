@@ -1,6 +1,79 @@
+
+
+/* para que el mause cambie a manita cuando pasas el mause encima */
 .selectable{
     cursor: pointer;
 }
+
+
+/* elevar contenedor cuando pasas el mause por encima */
+.zoom-on-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+   
+}
+
+.zoom-on-hover:hover {
+    box-shadow: 0 0 11px rgba(29, 29, 29, 0.2);
+    transform: scale(1.01); 
+}
+
+/*descatar contenido cuando pasas el mause encima*/
+.highlight-on-hover {
+    transition: all 0.3s ease; 
+}
+
+.highlight-on-hover:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+/* hacer que el texto al no tener espacio muestre ... indicando que falta texto */
+.text-ellipsis {
+    max-width: 100%; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+
+/*para que el icono de la lupa este en el input*/
+.position-relative {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px; 
+    transform: translateY(-50%); 
+    color: #495057; 
+}
+
+.pr-5 {
+    padding-right: 2.5rem;
+}
+
+
+/*altura de los contenedores*/
+.container-section{
+    height: 68vh !important;
+    overflow-x: hidden ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* estilos scroll bar */
 /* width */

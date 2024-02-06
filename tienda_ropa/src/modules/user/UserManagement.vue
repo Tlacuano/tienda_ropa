@@ -1,81 +1,91 @@
 <template>
     <b-container fluid>
         <b-row class="mt-4">
-            <b-col>
+            <b-col class="text-center">
                 <h1>Usuarios</h1>
             </b-col>
         </b-row>
         <b-row class="mt-4" align-h="between">
             <b-col cols="12" lg="5">
-                <b-form-group >
-                    <b-form-input id="search" type="text" placeholder="Ingrese su búsqueda"></b-form-input>
-                </b-form-group>
+                <b-form-group>
+                    <div class="position-relative">
+                        <b-form-input id="search" type="text" placeholder="Buscar..." class="pr-5"></b-form-input>
+                        <font-awesome-icon icon="magnifying-glass" class="search-icon"></font-awesome-icon>
+                    </div>
+                </b-form-group>>
             </b-col>
             <b-col cols="auto" class="text-right">
-                <b-button v-b-modal.insertNewUser variant="dark">Crear cuenta</b-button>
+                <b-button v-b-modal.insertNewUser variant="dark">Registrar</b-button>
             </b-col>
         </b-row>
         <b-row class="my-3">
             <b-col cols="12">
-                <b-card  class="container-users">
-                    <section v-for="user in paginatedUsers" :key="user.id">
-                        <div class=" container-user">
-                            <b-row no-gutters>
-                                <b-col lg="1" class="d-none d-lg-block">
-                                    <b-img
-                                        :src="user.imageProfile"
-                                        alt="Foto perfil"
-                                        rounded
-                                        fluid
-                                        thumbnail
-                                        v-if="user.imageProfile"
-                                    ></b-img>
-                                    <b-avatar
-                                        class="mt-2 ml-3"
-                                        :src="user.imageProfile"
-                                        alt="Foto perfil"
-                                        v-else
-                                    ></b-avatar>
+                <b-row  class="container-users" align-h="between">
+                    <b-col lg="4" v-for="user in paginatedUsers" :key="user.id">
+                        <b-card no-body class="highlight-on-hover container-user" >
+                            <b-row class="m-2" no-gutters>
+                                <b-col class="px-2" cols="auto">
+                                    <b-avatar variant="secondary" :src="user.imageProfile"/>
                                 </b-col>
-                                <b-col lg="11">
-                                    <b-row align-v="center" class="h-100">
-                                        <b-col  v-b-modal.UserDetailsModal >
-                                            <h5  class="mb-1">{{ user.name }}</h5>
-                                            <p class="mb-1">{{ user.role }}</p>
+                                <b-col>
+                                    <b-row>
+                                        <b-col>
+                                            <div class="text-ellipsis">{{user.name}}</div>
                                         </b-col>
-                                        <b-col cols="auto">
-                                            <b-badge
-                                                variant="danger"
-                                                class="mb-1"
-                                                v-if="user.status !== 'habilidato'"
-                                            >
-                                                Desabilitado
-                                            </b-badge>
-                                        </b-col>
-                                        <b-col cols="auto" class="d-none d-md-block">
-                                            <font-awesome-icon
-                                                v-b-tooltip.hover="'Deshabilitar'"
-                                                icon="circle-down"
-                                                size="2xl"
-                                                v-if="user.status === 'habilidato'"
-                                                class="selectable"
-                                                
-                                            />
-                                            <font-awesome-icon
-                                                v-b-tooltip.hover="'Habilitar'"
-                                                icon="circle-up"
-                                                size="2xl"
-                                                v-else
-                                                style="color: #1ea440;"
-                                                class="selectable"
-                                            />
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                            <div class="text-ellipsis text-secondary" style="max-width: 90%;">{{user.role}}</div>
                                         </b-col>
                                     </b-row>
                                 </b-col>
+                                <b-col cols="auto">
+                                    <b-badge
+                                        variant="light"
+                                        class="mb-1"
+                                        v-if="user.status === 'habilitado'"
+                                        @click="handleChangeStatus(user.id, false)"
+                                    >
+                                        Habilitado
+                                    </b-badge>
+                                    <b-badge
+                                        variant="danger"
+                                        class="mb-1"
+                                        v-if="user.status !== 'habilitado'"
+                                    >
+                                        Desabilitado
+                                    </b-badge>
+                                    
+                                    <b-dropdown   variant="link-dark" toggle-class="text-decoration-none" no-caret >
+                                        <template #button-content>
+                                            <b-icon icon="three-dots-vertical"></b-icon>
+                                        </template>
+                                        <b-dropdown-item>
+                                            <b-row v-if="user.status !== 'habilitado'">
+                                                <b-col>
+                                                    <small>Habilitar</small>
+                                                </b-col>
+                                                <b-col>
+                                                    <font-awesome-icon icon="circle-up"></font-awesome-icon>
+                                                </b-col>
+                                            </b-row>
+
+                                            <b-row v-else>
+                                                <b-col cols="auto">
+                                                    <small>Desabilitar</small> 
+                                                </b-col>
+                                                <b-col>
+                                                    <font-awesome-icon icon="circle-down"></font-awesome-icon>
+                                                </b-col>
+                                            </b-row>
+                                        </b-dropdown-item>
+                                        
+                                    </b-dropdown>
+                                </b-col>
                             </b-row>
-                        </div>
-                    </section>
-                </b-card>
+                        </b-card>
+                    </b-col>
+                </b-row>
             </b-col>
         </b-row> 
         <b-row>
@@ -98,14 +108,14 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name: 'UserManagment',
+    name: 'UserManagement',
     components: {
         InsertNewUser: () => import('./InsertNewUserModal.vue'),
         UserDetailsModal: () => import('./UserDetailsModal.vue'),
     },
     data() {
         return {
-            perPage: 7, // Número de elementos por página
+            perPage: 24, // Número de elementos por página
             currentPage: 1, // Página actual
             users: [
                 {
@@ -113,7 +123,7 @@ export default Vue.extend({
                     name: 'John Doe Enriquez de la Cruz',
                     email: 'unCorreo@gmail.com',
                     role: 'administrador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -121,7 +131,7 @@ export default Vue.extend({
                     name: 'Jane Smith',
                     email: 'otroCorreo@gmail.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -137,7 +147,7 @@ export default Vue.extend({
                     name: 'Ana Pérez',
                     email: 'ana@email.com',
                     role: 'administrador, vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -153,7 +163,7 @@ export default Vue.extend({
                     name: 'María García',
                     email: 'maria@email.com',
                     role: 'administrador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -161,7 +171,7 @@ export default Vue.extend({
                     name: 'Pedro Ramírez',
                     email: 'pedro@email.com',
                     role: 'comprador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -177,7 +187,7 @@ export default Vue.extend({
                     name: 'Roberto Martínez',
                     email: 'roberto@email.com',
                     role: 'administrador, vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -193,7 +203,7 @@ export default Vue.extend({
                     name: 'Daniel Jiménez',
                     email: 'daniel@email.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -201,7 +211,7 @@ export default Vue.extend({
                     name: 'Carmen Torres',
                     email: 'carmen@email.com',
                     role: 'administrador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -217,7 +227,7 @@ export default Vue.extend({
                     name: 'Elena Ruiz',
                     email: 'elena@email.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -225,7 +235,7 @@ export default Vue.extend({
                     name: 'Francisco Herrera',
                     email: 'francisco@email.com',
                     role: 'administrador, vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -241,7 +251,7 @@ export default Vue.extend({
                     name: 'Javier Castro',
                     email: 'javier@email.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -249,7 +259,7 @@ export default Vue.extend({
                     name: 'Luisa Martín',
                     email: 'luisa@email.com',
                     role: 'administrador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -265,7 +275,7 @@ export default Vue.extend({
                     name: 'Beatriz Romero',
                     email: 'beatriz@email.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -273,7 +283,7 @@ export default Vue.extend({
                     name: 'Fernando Vargas',
                     email: 'fernando@email.com',
                     role: 'administrador, vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -289,7 +299,7 @@ export default Vue.extend({
                     name: 'Alberto Medina',
                     email: 'alberto@email.com',
                     role: 'vendedor',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -297,7 +307,7 @@ export default Vue.extend({
                     name: 'Rosa Mendoza',
                     email: 'rosa@email.com',
                     role: 'administrador',
-                    status: 'habilidato',
+                    status: 'habilitado',
                     imageProfile: null,
                 },
                 {
@@ -332,17 +342,11 @@ export default Vue.extend({
 <style>
     .container-users{
         height: 68vh !important;
-        overflow-y: scroll;
+        overflow-x: hidden ;
     }
 
     .container-user{
-        border: 1px solid #e2e2e2;
-        border-radius: 5px;
-        padding: 9px;
-    }
-
-    .container-user:hover{
-        background-color: #f2f2f2;
+        width: 100%;
     }
 </style>
 
