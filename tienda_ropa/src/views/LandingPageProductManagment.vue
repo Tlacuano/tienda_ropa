@@ -4,7 +4,7 @@
             <h1>Gestión de productos</h1>
         </div>
         <div class="text-right">
-            <b-button variant="dark">Registrar producto</b-button>
+            <b-button variant="dark" v-b-modal.insertNewProduct>Registrar producto</b-button>
         </div>
         <br />
         <br />
@@ -34,7 +34,7 @@
                         <b-col md="1" class="dropdown" @click="toggleDropdown">
                             <button class="dropbtn">•••</button>
                             <div class="dropdown-content">
-                                <a href="#">Editar</a>
+                                <a href="#" v-b-modal.editProduct>Editar</a>
                                 <a href="#">Eliminar</a>
                             </div>
                         </b-col>
@@ -42,7 +42,8 @@
                 </b-card>
             </b-col>
         </b-row>
-
+        <ProductRegistration />
+        <ProductEdit/>
     </div>
 </template>
 
@@ -87,7 +88,7 @@ export default Vue.extend({
                     department: 'Pantalón',
                     imageUrl: 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F08%2Fe0%2F08e0a403c8a13297700045643d5c39e90e8e1c1e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/mobilefullscreen]'
                 },
-                
+
                 // ... otros productos
             ]
         }

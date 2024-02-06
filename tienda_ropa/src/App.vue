@@ -4,14 +4,16 @@ import LandingPageProductManagment from './views/LandingPageProductManagment.vue
 
 export default Vue.extend({
   name: 'App',
-  components: {    
+  components: {   
+    LandingPageProductManagment
 },
 })
 </script>
 
 <template>
   <div id="app">
-    <b-container fluid>          
+    <b-container fluid>  
+      <LandingPageProductManagment />        
     </b-container>
   </div>
 </template>
