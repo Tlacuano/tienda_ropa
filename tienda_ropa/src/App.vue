@@ -1,16 +1,17 @@
 <script lang="ts">
 import Vue from 'vue'
+import LandingPageProductManagment from './views/LandingPageProductManagment.vue';
 
 export default Vue.extend({
   name: 'App',
-  components: {
-  },
+  components: {    
+},
 })
 </script>
 
 <template>
   <div id="app">
-    <b-container fluid>
+    <b-container fluid>          
     </b-container>
   </div>
 </template>
