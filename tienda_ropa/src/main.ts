@@ -16,9 +16,9 @@ Vue.use(IconsPlugin)
 //importacion de fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret , faPen, faTrash, faCircleUp, faCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret , faPen, faTrash, faCircleUp, faCircleDown, faEye, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserSecret, faPen, faTrash, faCircleUp, faCircleDown);
+library.add(faUserSecret, faPen, faTrash, faCircleUp, faCircleDown, faEye, faMagnifyingGlass);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
