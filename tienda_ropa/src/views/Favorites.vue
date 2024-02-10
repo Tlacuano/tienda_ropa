@@ -19,13 +19,16 @@
           <b-card-text>
             <b-row>
               <b-col cols="12">
-                <b>Catálogo:</b> {{ favoriteProduct.catalogue }}
+                <b>{{ favoriteProduct.title }}</b>
               </b-col>
               <b-col cols="12">
-                <b>Color:</b> {{ favoriteProduct.color }}
-              </b-col>
-              <b-col cols="12" class="product-price">
                 ${{ favoriteProduct.price }}
+              </b-col>
+              <b-col cols="12">
+                {{ favoriteProduct.catalogue }}
+              </b-col>
+              <b-col cols="12">
+                {{ favoriteProduct.color }}
               </b-col>
             </b-row>
           </b-card-text>
@@ -35,7 +38,7 @@
                 <b-select :ref="'sizeSelect-' + favoriteProduct.id" v-model="favoriteProduct.selectedSize"
                           :options="favoriteProduct.availableSizes" class="mb-2">
                   <template v-slot:first>
-                    <option :value="null" disabled>Selecciona una talla</option>
+                    <option :value="null" disabled>Selecciona una talla...</option>
                   </template>
                 </b-select>
               </b-col>
@@ -126,7 +129,7 @@ export default {
 }
 
 .tight-content {
-  margin: 1rem 15rem;
+  margin: 1rem 10rem;
 }
 
 .favorite-content {
@@ -158,18 +161,13 @@ export default {
   background-color: white;
 }
 
-.product-price {
-  font-weight: bold;
-  color: #cc0000;
-}
-
 @media (max-width: 1200px) {
   .card-title {
     font-size: 1.2rem;
   }
 
   .tight-content {
-    margin: 1rem 10rem;
+    margin: 1rem 8rem;
   }
 }
 

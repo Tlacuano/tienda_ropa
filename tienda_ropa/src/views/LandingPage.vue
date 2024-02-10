@@ -6,7 +6,7 @@
       </b-col>
     </b-row>
     <b-row class="tight-content">
-      <b-col cols="12" xl="4">
+      <b-col class="mb-2" cols="12" xl="4">
         <b-card
             overlay
             :img-src="'https://picsum.photos/300/400?random=' + Math.floor(Math.random() * 100) +'&grayscale&blur'"
@@ -19,7 +19,7 @@
           </b-card-text>
         </b-card>
       </b-col>
-      <b-col cols="12" xl="4">
+      <b-col class="mb-2" cols="12" xl="4">
         <b-card
             overlay
             :img-src="'https://picsum.photos/300/400?random=' + Math.floor(Math.random() * 100) +'&grayscale&blur'"
@@ -32,7 +32,7 @@
           </b-card-text>
         </b-card>
       </b-col>
-      <b-col cols="12" xl="4">
+      <b-col class="mb-2" cols="12" xl="4">
         <b-card
             overlay
             :img-src="'https://picsum.photos/300/400?random=' + Math.floor(Math.random() * 100) +'&grayscale&blur'"
@@ -63,7 +63,7 @@ export default {
 }
 
 .tight-content {
-  margin: 1rem 15rem;
+  margin: 1rem 3rem;
 }
 
 .card {
@@ -75,31 +75,13 @@ export default {
   transform: scale(1.01);
 }
 
-.card-img-top {
-  max-height: 400px;
-  object-fit: cover;
-}
-
-.card-img-top:hover {
-  cursor: pointer;
-}
-
-.card-footer {
-  background-color: white;
-}
-
-.product-price {
-  font-weight: bold;
-  color: #cc0000;
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .card-title {
     font-size: 1.2rem;
   }
 
   .tight-content {
-    margin: 1rem 10rem;
+    margin: 1rem 8rem;
   }
 }
 
