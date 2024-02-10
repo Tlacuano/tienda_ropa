@@ -1,9 +1,12 @@
 <script lang="ts">
 import Vue from 'vue'
+import ProductCategories from "@/views/ProductCategories.vue";
+
 
 export default Vue.extend({
   name: 'App',
   components: {
+    ProductCategories
   },
 })
 </script>
@@ -11,6 +14,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <b-container fluid>
+      <ProductCategories />
     </b-container>
   </div>
 </template>

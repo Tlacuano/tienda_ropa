@@ -1,11 +1,11 @@
 <template>
-    <b-container fluid>
-        <b-row class="mt-4">
-                <b-col id="tittle">
-                    <h1>Metodo de pago</h1>
-                </b-col>
-            </b-row>
-            
+  <b-container fluid>
+    <b-row class="mt-4">
+      <b-col id="tittle">
+        <h1>Metodo de pago</h1>
+      </b-col>
+    </b-row>
+
 
     <b-row class="mt-4">
       <b-col>
@@ -18,12 +18,12 @@
       </b-col>
     </b-row>
     <b-row class="mt-4">
-        <b-col>
+      <b-col>
         <h1>Total a Pagar</h1>
         <p>{{ totalAmount }} USD</p>
       </b-col>
-            </b-row>
-    
+    </b-row>
+
 
     <b-row class="mt-4">
       <b-col id="paymentMethod">
@@ -44,7 +44,6 @@
 </template>
 
 <script lang="ts">
-
 import Vue from 'vue'
 
 
@@ -55,8 +54,8 @@ export default Vue.extend({
       selectedPaymentMethod: null,
       paymentMethods: ['Tarjeta de Crédito', 'PayPal', 'Otro'],
       cartProducts: [
-        { name: 'Camisa', price: 30 },
-        { name: 'Pantalón', price: 40 },
+        {name: 'Camisa', price: 30},
+        {name: 'Pantalón', price: 40},
       ],
     };
   },
@@ -68,7 +67,7 @@ export default Vue.extend({
   methods: {
     goToShipping() {
       if (this.selectedPaymentMethod) {
-        this.$router.push({ name: 'shippingAddress' });
+        this.$router.push({name: 'shippingAddress'});
       } else {
         alert('Por favor, selecciona un método de pago');
       }
