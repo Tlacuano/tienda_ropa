@@ -9,29 +9,23 @@
         <br />
         <br />
         <b-row>
-            <b-col md="4" sm="6" v-for="product in products" :key="product.id" class="mb-3">
-                <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-col lg="4" md="4" sm="6" cols="12" v-for="product in products" :key="product.id" class="mb-3">
+                <b-card no-body>
                     <b-row no-gutters>
-                        <b-col md="4" class="img-product">
-                            <b-card-img :src="product.imageUrl" alt="Imagen del producto"></b-card-img>
+                        <b-col cols="5" sm="4" md="4" lg="4" class="overflow-hidden img-product">
+                            <img :src="product.imageUrl" alt="Imagen del producto" class="img" />
                         </b-col>
-                        <b-col md="7">
-                            <b-card-body>
-                                <b-card-title>{{ product.name }}</b-card-title>
-                                <b-card-text>
-                                    <p class="product-price"><strong>Precio: $</strong>{{ product.price }}</p>
-                                    <br />
-                                    <p class="product-stock"><strong>Piezas disponibles: </strong> {{ product.stock }}</p>
-                                    <br />
-                                    <p class="product-category"><strong>Categoría: </strong> {{ product.category }}</p>
-                                    <br />
-                                    <p class="product-department"><strong>Departamento: </strong> {{ product.department }}
-                                    </p>
-                                    <br />
-                                </b-card-text>
-                            </b-card-body>
+                        <b-col cols="5" sm="6" md="7" lg="7">
+                            <b-card-text class="container-text">
+                                <h2>{{ product.name }}</h2>
+                                <p class="product-price"><b>Precio: $</b>{{ product.price }}</p>
+                                <p class="product-stock"><b>Piezas disponibles: </b> {{ product.stock }}</p>
+                                <p class="product-category"><b>Categoría: </b> {{ product.category }}</p>
+                                <p class="product-department"><b>Departamento: </b> {{ product.department }}
+                                </p>
+                            </b-card-text>
                         </b-col>
-                        <b-col md="1" class="dropdown" @click="toggleDropdown">
+                        <b-col cols="1" sm="1" md="1" lg="1" class="dropdown" @click="toggleDropdown">
                             <button class="dropbtn">•••</button>
                             <div class="dropdown-content">
                                 <a href="#" v-b-modal.editProduct>Editar</a>
@@ -43,7 +37,7 @@
             </b-col>
         </b-row>
         <ProductRegistration />
-        <ProductEdit/>
+        <ProductEdit />
     </div>
 </template>
 
@@ -127,22 +121,54 @@ export default Vue.extend({
     padding: 20px;
 }
 
-.product-price,
-.product-stock,
-.product-category,
-.product-department {
-    margin-bottom: 0;
+.container-text {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .img-product {
-    width: 200px;
-    height: 230px;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width:575px) {
+    .img-product {
+        width: 100%;
+        height: auto;        
+    }
+
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width:767px) {
+    .img-product {
+        width: 100%;
+        height: auto;
+        
+    }
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 @media (max-width: 767px) {
     .product-management {
         padding: 10px;
     }
+
+
 }
 
 .container-btn {
@@ -194,5 +220,4 @@ export default Vue.extend({
 /* Cambia el color de los ítems del dropdown al pasar el mouse */
 .dropdown-content a:hover {
     background-color: #ddd;
-}
-</style>
+}</style>

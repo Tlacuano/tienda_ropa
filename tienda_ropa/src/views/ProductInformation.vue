@@ -14,6 +14,7 @@
             style="text-shadow: 1px 1px 2px #333;"
         >
           <b-carousel-slide
+              class="max-height"
               v-for="(image, index) in product.images"
               :key="index"
               :img-src="image"
@@ -193,12 +194,16 @@ export default {
   text-align: center;
 }
 
+.max-height {
+  max-height: 95vh;
+}
+
 .blocky {
   width: 100%;
 }
 
 .tight-content {
-  margin: 1rem 15rem;
+  margin: 1rem 13rem;
 }
 
 .card-text {
@@ -220,10 +225,6 @@ export default {
 @media (max-width: 1200px) {
   .card-title {
     font-size: 1.2rem;
-  }
-
-  .tight-content {
-    margin: 1rem 10rem;
   }
 }
 

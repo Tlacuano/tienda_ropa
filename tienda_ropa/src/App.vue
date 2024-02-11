@@ -7,13 +7,17 @@ export default Vue.extend({
   components: {   
     LandingPageProductManagment
 },
+
+
 })
 </script>
 
 <template>
   <div id="app">
+
     <b-container fluid>  
       <LandingPageProductManagment />        
+
     </b-container>
   </div>
 </template>
