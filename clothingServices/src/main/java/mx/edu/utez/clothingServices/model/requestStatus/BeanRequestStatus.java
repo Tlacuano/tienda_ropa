@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mx.edu.utez.clothingServices.model.requestSellProduct.BeanReuestSellProduct;
 import mx.edu.utez.clothingServices.model.requestSeller.BeanRequestSeller;
 
 import java.util.List;
@@ -22,7 +23,11 @@ public class BeanRequestStatus {
 
     //relacion uno a muchos con la tabla requestSeller
     @OneToMany(mappedBy = "status")
-    private List<BeanRequestSeller> beanRequestSeller;
+    private List<BeanRequestSeller> requestsSellers;
+
+    //relacion uno a muchos con la tabla requestSellProduct
+    @OneToMany(mappedBy = "status")
+    private List<BeanReuestSellProduct> reuestsSellProducts;
 
 
 }
