@@ -1,6 +1,6 @@
 <template>
     <b-container fluid>
-        <b-row class="mt-4">
+        <b-row class="mt-3">
             <b-col class="text-center">
                 <h1>Usuarios</h1>
             </b-col>
@@ -12,7 +12,7 @@
                         <b-form-input id="search" type="text" placeholder="Buscar..." class="pr-5"></b-form-input>
                         <font-awesome-icon icon="magnifying-glass" class="search-icon"></font-awesome-icon>
                     </div>
-                </b-form-group>>
+                </b-form-group>
             </b-col>
             <b-col cols="auto" class="text-right">
                 <b-button v-b-modal.insertNewUser variant="dark">Registrar</b-button>
@@ -20,77 +20,74 @@
         </b-row>
         <b-row class="my-3">
             <b-col cols="12">
-                <b-row  class="container-users" align-h="between">
-                    <b-col lg="4" v-for="user in paginatedUsers" :key="user.id">
-                        <b-card no-body class="highlight-on-hover container-user" >
-                            <b-row class="m-2" no-gutters>
-                                <b-col class="px-2" cols="auto">
-                                    <b-avatar variant="secondary" :src="user.imageProfile"/>
-                                </b-col>
-                                <b-col>
-                                    <b-row>
-                                        <b-col>
-                                            <div class="text-ellipsis">{{user.name}}</div>
-                                        </b-col>
-                                    </b-row>
-                                    <b-row>
-                                        <b-col>
-                                            <div class="text-ellipsis text-secondary" style="max-width: 90%;">{{user.role}}</div>
-                                        </b-col>
-                                    </b-row>
-                                </b-col>
-                                <b-col cols="auto">
-                                    <b-badge
-                                        variant="light"
-                                        class="mb-1"
-                                        v-if="user.status === 'habilitado'"
-                                        @click="handleChangeStatus(user.id, false)"
-                                    >
-                                        Habilitado
-                                    </b-badge>
-                                    <b-badge
-                                        variant="danger"
-                                        class="mb-1"
-                                        v-if="user.status !== 'habilitado'"
-                                    >
-                                        Desabilitado
-                                    </b-badge>
-                                    
-                                    <b-dropdown   variant="link-dark" toggle-class="text-decoration-none" no-caret >
-                                        <template #button-content>
-                                            <b-icon icon="three-dots-vertical"></b-icon>
-                                        </template>
-                                        <b-dropdown-item>
-                                            <b-row v-if="user.status !== 'habilitado'">
-                                                <b-col>
-                                                    <small>Habilitar</small>
-                                                </b-col>
-                                                <b-col>
-                                                    <font-awesome-icon icon="circle-up"></font-awesome-icon>
-                                                </b-col>
-                                            </b-row>
-
-                                            <b-row v-else>
-                                                <b-col cols="auto">
-                                                    <small>Desabilitar</small> 
-                                                </b-col>
-                                                <b-col>
-                                                    <font-awesome-icon icon="circle-down"></font-awesome-icon>
-                                                </b-col>
-                                            </b-row>
-                                        </b-dropdown-item>
+                <section class="container-users">
+                    <b-row>
+                        <b-col lg="4" v-for="user in paginatedUsers" :key="user.id">
+                            <b-card no-body class="highlight-on-hover mb-1" >
+                                <b-row class="m-2" no-gutters align-h="between">
+                                    <b-col class="d-none d-sm-block px-2" cols="auto">
+                                        <b-avatar variant="secondary" :src="user.imageProfile"/>
+                                    </b-col>
+                                    <b-col>
+                                        <b-row>
+                                            <b-col>
+                                                <div class="d-inline-block text-truncate" style="max-width: 160px;">{{user.name}}</div>
+                                            </b-col>
+                                        </b-row>
+                                        <b-row >
+                                            <b-col>
+                                                <div class="d-inline-block text-truncate text-muted fs-6" style="max-width: 160px;">{{user.role}}</div>
+                                            </b-col>
+                                        </b-row>
+                                    </b-col>
+                                    <b-col cols="auto">
+                                        <b-badge
+                                            variant="light"
+                                            class="mb-1"
+                                            v-if="user.status === 'habilitado'"
+                                            @click="handleChangeStatus(user.id, false)"
+                                        >
+                                            Habilitado
+                                        </b-badge>
+                                        <b-badge
+                                            variant="danger"
+                                            class="mb-1"
+                                            v-if="user.status !== 'habilitado'"
+                                        >
+                                            Desabilitado
+                                        </b-badge>
                                         
-                                    </b-dropdown>
-                                </b-col>
-                            </b-row>
-                        </b-card>
-                    </b-col>
-                </b-row>
+                                        <b-dropdown   variant="link-dark" toggle-class="text-decoration-none" no-caret >
+                                            <template #button-content>
+                                                <b-icon icon="three-dots-vertical"></b-icon>
+                                            </template>
+                                            <b-dropdown-item>
+                                                <b-row v-if="user.status !== 'habilitado'">
+                                                    <b-col>
+                                                        <small>Habilitar</small>
+                                                    </b-col>
+                                                </b-row>
+    
+                                                <b-row v-else>
+                                                    <b-col>
+                                                        <small>Desabilitar</small> 
+                                                    </b-col>
+                                                </b-row>
+                                            </b-dropdown-item>
+                                            
+                                        </b-dropdown>
+                                    </b-col>
+                                </b-row>
+                            </b-card>
+                        </b-col>
+                    </b-row>
+                </section>
             </b-col>
         </b-row> 
         <b-row>
             <b-col>
                 <b-pagination
+                    align="center"
                     v-model="currentPage"
                     :total-rows="users.length"
                     :per-page="perPage"
@@ -115,7 +112,7 @@ export default Vue.extend({
     },
     data() {
         return {
-            perPage: 24, // Número de elementos por página
+            perPage: 18, // Número de elementos por página
             currentPage: 1, // Página actual
             users: [
                 {
@@ -318,6 +315,14 @@ export default Vue.extend({
                     status: 'Desabilitado',
                     imageProfile: null,
                 },
+                {
+                    id: 26,
+                    name: 'Pablo Herrera',
+                    email: 'pablo@email.com',
+                    role: 'comprador',
+                    status: 'Desabilitado',
+                    imageProfile: null,
+                },
             ],
         }
     },
@@ -341,7 +346,7 @@ export default Vue.extend({
 
 <style>
     .container-users{
-        height: 68vh !important;
+        min-height: 67vh !important;
         overflow-x: hidden ;
     }
 

@@ -1,11 +1,12 @@
 <script lang="ts">
 import Vue from 'vue'
-import LandingPageProductManagment from './views/LandingPageProductManagment.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {   
-    LandingPageProductManagment
+    UserManagement : () => import('@/modules/user/UserManagement.vue'),
+    DepartmentsManagement : () => import('@/modules/department/DepartmentsManagement.vue'),
+    CategoriesManagement : () => import('@/modules/category/CategoriesManagement.vue'),
 },
 
 
@@ -16,8 +17,7 @@ export default Vue.extend({
   <div id="app">
 
     <b-container fluid>  
-      <LandingPageProductManagment />        
-
+      <CategoriesManagement />
     </b-container>
   </div>
 </template>
