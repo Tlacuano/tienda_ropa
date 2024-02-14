@@ -2,7 +2,7 @@
     <b-modal id="DepartamentDetailsModal" hide-footer centered size="lg" title="Departamento">
         <b-row class="my-3">
             <b-col>
-                <b-containter fluid>
+                <b-container fluid>
                     <b-row>
                         <b-col>
                             <b-form-group label="Nombre:" label-for="id">
@@ -49,7 +49,7 @@
                     </b-row>
 
 
-                </b-containter>
+                </b-container>
             </b-col>
             <b-col>
                 <b-img

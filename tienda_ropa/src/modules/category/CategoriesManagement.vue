@@ -19,75 +19,63 @@
             </b-col>
         </b-row>
         <b-row class="my-3">
-            <b-col cols="12" class="container-section">
-                <b-list-group>
-                    <b-list-group-item v-for="category in paginatedCategories" :key="category.id" class="highlight-on-hover">
-                        <b-row no-gutters align-h="between">
-                            <b-col>
-                                <div class="text-ellipsis">
-                                    <h5>
-                                        {{ category.name }}
-                                    </h5>
-                                </div>
-                            </b-col>
-                            <b-col>
-                                <b-badge v-if="category.status === 'habilitado'" variant="light">Habilitado</b-badge>
-                                <b-badge v-else variant="danger">Deshabilitado</b-badge>
-                            </b-col>
-                            <b-col cols="auto">
-                                <b-dropdown variant="link-dark" toggle-class="text-decoration-none" no-caret>
-                                    <template #button-content>
-                                        <b-icon icon="three-dots-vertical"></b-icon>
-                                    </template>
-                                    <b-dropdown-item v-b-modal.CategoryDetailsModal>
-                                        <b-row>
-                                            <b-col>
-                                                <small>Detalles</small>
-                                            </b-col>
-                                            <b-col cols="auto">
-                                                <font-awesome-icon icon="eye"></font-awesome-icon>
-                                            </b-col>
-                                        </b-row>
-                                    </b-dropdown-item>
-                                    <b-dropdown-item v-b-modal.UpdateCategoryModal>
-                                        <b-row>
-                                            <b-col>
-                                                <small>Editar</small>
-                                            </b-col>
-                                            <b-col cols="auto">
-                                                <font-awesome-icon icon="pen"></font-awesome-icon>
-                                            </b-col>
-                                        </b-row>
-                                    </b-dropdown-item>
-                                    <b-dropdown-item>
-                                        <b-row v-if="category.status !== 'habilitado'">
-                                            <b-col>
-                                                <small>Habilitar</small>
-                                            </b-col>
-                                            <b-col cols="auto">
-                                                <font-awesome-icon icon="circle-up"></font-awesome-icon>
-                                            </b-col>
-                                        </b-row>
-
-                                        <b-row v-else>
-                                            <b-col >
-                                                <small>Desabilitar</small> 
-                                            </b-col>
-                                            <b-col cols="auto">
-                                                <font-awesome-icon icon="circle-down"></font-awesome-icon>
-                                            </b-col>
-                                            </b-row>
-                                    </b-dropdown-item>
-                                </b-dropdown>
-                            </b-col>
-                        </b-row>
-                    </b-list-group-item>
-                </b-list-group>  
+            <b-col cols="12" >
+                <section class="container-section">
+                    <b-row>
+                        <b-col lg="4" v-for="category in paginatedCategories" :key="category.id" class="container-category">
+                            <b-card no-body class="highlight-on-hover mb-1">
+                                <b-row>
+                                    <b-col class="mx-3 mt-2">
+                                        <div  class="d-inline-block text-truncate" style="max-width: 160px;">
+                                            <h5>{{ category.name }}</h5>
+                                        </div>
+                                    </b-col>
+                                    <b-col cols="auto mt-1">
+                                        <b-badge
+                                            variant="light"
+                                            class="mb-1"
+                                            v-if="category.status === 'habilitado'"
+                                        >
+                                            Habilitado
+                                        </b-badge>
+                                        <b-badge
+                                            variant="danger"
+                                            class="mb-1"
+                                            v-if="category.status !== 'habilitado'"
+                                        >
+                                            Desabilitado
+                                        </b-badge>
+                                        <b-dropdown   variant="link-dark" toggle-class="text-decoration-none" no-caret >
+                                            <template #button-content>
+                                                <b-icon icon="three-dots-vertical"></b-icon>
+                                            </template>
+                                            <b-dropdown-item v-b-modal.CategoryDetailsModal>
+                                                <b-row>
+                                                    <b-col>
+                                                        <small>Detalles</small>
+                                                    </b-col>
+                                                </b-row>
+                                            </b-dropdown-item>
+                                            <b-dropdown-item v-b-modal.UpdateCategoryModal>
+                                                <b-row>
+                                                    <b-col>
+                                                        <small>Actualizar</small>
+                                                    </b-col>
+                                                </b-row>
+                                            </b-dropdown-item>
+                                        </b-dropdown>
+                                    </b-col>
+                                </b-row>
+                            </b-card>
+                        </b-col>
+                    </b-row>
+                </section> 
             </b-col>
         </b-row>
         <b-row>
             <b-col>
                 <b-pagination
+                align="center"
                     v-model="currentPage"
                     :total-rows="categories.length"
                     :per-page="perPage"
@@ -182,18 +170,13 @@ export default Vue.extend({
 
 <style scoped>
     .container-categories {
-        height: 68vh !important;
-        overflow-y: scroll;
+        min-height: 67vh !important;
+        overflow-x: hidden ;
     }
 
     .container-category{
-        border: 1px solid #e2e2e2;
-        border-radius: 5px;
-        padding: 9px;
+        width: 100%;
     }
 
-    .container-category:hover{
-        background-color: #f2f2f2;
-    }
 
 </style>
