@@ -3,11 +3,9 @@
 </script>
 
 <template>
-<b-container>
-  <router-view></router-view>
-</b-container>
+  <div id="app">
+      <router-view/>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
