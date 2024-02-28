@@ -67,7 +67,7 @@ export default {
     },
     async postData(userData) {
       try {
-        const response = await axios.post('', userData)
+        const response = await axios.post('http://localhost:8080/api/auth', userData)
         let usernameDecrypt = this.decrypt(response.data.username, response.data.secretKey)
         if (usernameDecrypt) {
           await Swal.fire({
