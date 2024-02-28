@@ -1,20 +1,23 @@
 <template>
-  <b-container fluid>
-    <b-row class="body">
-      <b-col class="body-login">
-        <b-form @submit.prevent="submitLogin" v-if="!submitted">
-          <b-form-group :state="getEmailState()">
-            <b-form-input id="email" type="email" v-model="credentials.email" placeholder="Correo electrónico" required>
-            </b-form-input>
-          </b-form-group>
-          <b-form-group :state="getPasswordState()">
-            <b-form-input id="password" type="password" v-model="credentials.password" placeholder="Contraseña" required>
-            </b-form-input>
-          </b-form-group>
-          <b-button type="submit" class="custom-button" block>Iniciar sesión</b-button>
-        </b-form>
-        <div v-if="submited && errorMessage" class="text-danger">{errorMessage}</div>
-      </b-col>
+  <b-container fluid class="body">
+    <b-row class="card">
+        <b-col class="card2">
+          <b-form @submit.prevent="submitLogin" v-if="!submitted" class="form">
+            <h3 id="heading">Login</h3>
+            <b-form-group class="field">
+              <b-form-input id="email" type="email" v-model="credentials.email" placeholder="Correo electrónico"
+                class="input-field" required>
+              </b-form-input>
+            </b-form-group>
+            <b-form-group class="field">
+              <b-form-input id="password" type="password" v-model="credentials.password" placeholder="Contraseña"
+                class="input-field" required>
+              </b-form-input>
+            </b-form-group>
+            <b-button type="submit" class="custom-button" block>Iniciar sesión</b-button>
+          </b-form>
+          <!-- <div v-if="submited && errorMessage" class="text-danger">{errorMessage}</div>-->
+        </b-col>
     </b-row>
   </b-container>
 </template>
@@ -27,7 +30,7 @@ export default {
     return {
       credentials: {
         email: '',
-        password: '',        
+        password: '',
       },
       errorMessage: '',
       submitted: false,
@@ -65,8 +68,8 @@ export default {
     async postData(userData) {
       try {
         const response = await axios.post('', userData)
-        let usernameDecrypt = this.decrypt(response.data.username,response.data.secretKey)
-        if(usernameDecrypt){
+        let usernameDecrypt = this.decrypt(response.data.username, response.data.secretKey)
+        if (usernameDecrypt) {
           await Swal.fire({
             title: '¡Bienvenido!',
             text: `Has ingresado como ${usernameDecrypt}`,
@@ -82,10 +85,13 @@ export default {
       }
     },
     async submitLogin() {
+      //if (this.validateFields()) {
+
+
       const encryptedEmail = this.encryptData(this.credentials.email);
       const encryptedPassword = this.encryptData(this.credentials.password);
 
-      
+
       console.log('Encrypted Email:', encryptedEmail);
       console.log('Encrypted Password:', encryptedPassword);
       const userData = {
@@ -93,43 +99,101 @@ export default {
         password: encryptedPassword
       };
       this.postData(userData);
+      //}
     },
-
+    /*
+    validateFields() {
+      const emailValid = this.isValidEmail(this.credentials.email);
+      const passwordValid = this.credentials.password.length >= 6;
+      return emailValid && passwordValid;
+    },
+    */
+  }
+  /*
     getEmailState() {
-      if (!this.credentials.email) return null;
-      return this.isValidEmail(this.credentials.email) ? true : false
-    },
-    getPasswordState() {
-      if (!this.credentials.password) return null;
-      return this.credentials.password.length >= 6 ? true : false;
-    },
-    isValidEmail(email) {
-      return /\S+@\S+\.\S+/.test(email);
-    }
+    if (!this.credentials.email) return null;
+    return this.isValidEmail(this.credentials.email) ? true : false
   },
+  getPasswordState() {
+    if (!this.credentials.password) return null;
+    return this.credentials.password.length >= 6 ? true : false;
+  },
+  isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+},*/
 }
 
 </script>
 <style>
-
-.body-login{
-  margin: auto;
-  border-color:#353942;
-  width: 10px;
+#heading {
+  text-align: center;
+  margin: 2em;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
 }
-.body{
+
+.input-field{
+  margin-top: 10px;
+}
+
+.body {
+  background-color: #353942;
+  padding: 100px;
+}
+
+.card {
+  margin: auto;
+  width: 400px;
+  height: 350px;
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-radius: 22px;
+  transition: all 0.3s;
+}
+
+.card2 {
+  width: 400px;
+  height: 350px;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+.card2:hover {
+  transform: scale(0.98);
+  border-radius: 20px;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+}
+
+.form {
+  display: flex;
+  width: 375px;
+  height: 345px;
+  margin-top: 2px;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0.4em;
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+}
+
+.body-login {
+  margin: auto;
+  border-color: #353942;
+
+}
+
+.body {
   width: 100%;
   height: 100vh;
 }
-.custom-form-group {
-  text-align: center;
-}
-
-.custom-link {
-  color: black;
-}
 
 .custom-button {
+  margin-top: 10px;
   background-color: #353942;
-}
-</style>
+}</style>
