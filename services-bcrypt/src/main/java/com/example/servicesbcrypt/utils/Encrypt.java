@@ -18,8 +18,7 @@ public class Encrypt {
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
 
-    @Value("${encrypt.secret.key}")
-    private static  String KEY; // La clave need ser de 16 bytes
+    private static  String KEY = "el@ConGr3z041!12"; // La clave need ser de 16 bytes
 
 
     public static String encrypt(String value) throws Exception {

@@ -22,9 +22,9 @@ public class MainSecurity {
         return httpSecurity
                 .authorizeHttpRequests(authz ->
                         authz
-                                .requestMatchers(HttpMethod.GET, "/api/users")
+                                .requestMatchers(HttpMethod.POST, "/api/user/**")
                                 .permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/users/register")
+                                .requestMatchers(HttpMethod.POST, "/api/auth/")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

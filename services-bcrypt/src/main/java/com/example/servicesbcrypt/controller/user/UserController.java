@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/")
-    public ResponseEntity<?> insert(@RequestBody BeanUser user) {
+    public ResponseEntity<?> insert(@RequestBody BeanUser user) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.insertUser(user));
     }
 
