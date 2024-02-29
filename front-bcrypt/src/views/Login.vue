@@ -46,6 +46,7 @@ export default {
       const password = this.credentials.password;
       const jsonObject = {email,password};
       const jsonString = JSON.stringify(jsonObject)
+
       const secretKey = 'el@ConGr3z041!12'
       console.log(secretKey)
       if(!secretKey){
@@ -67,8 +68,9 @@ export default {
       const encryptedData = forge.util.encode64(iv+cipher.output.getBytes())
       const dataPost = encryptedData
       console.log(encryptedData)
+
       try {
-        const response = await axios.post('http://localhost:8080/api/auth', dataPost);
+        const response = await axios.post('http://localhost:8080/api/auth/', dataPost);
 
         // Obtener el IV (Initialization Vector) y los datos encriptados de la respuesta
         const iv = forge.util.decode64(response.data.iv);
@@ -94,7 +96,7 @@ export default {
         if (decryptedDataObject) {
           await Swal.fire({
             title: '¡Bienvenido!',
-            text: `Has ingresado como ${decryptedDataObject}`,
+            text: `Has ingresado como ${decryptedDataObject.data}`,
             icon: 'success'
           });
         }
