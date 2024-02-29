@@ -19,9 +19,6 @@ public class AuthService {
 
     public String loginUserByEmail(BeanToAuth toAuth) throws Exception {
 
-        toAuth.setEmail(Encrypt.decrypt(toAuth.getEmail()));
-        toAuth.setPassword(Encrypt.decrypt(toAuth.getPassword()));
-
         boolean exist = service.userExist(toAuth.getEmail());
         if (!exist) {
             return "false";
