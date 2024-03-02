@@ -67,39 +67,45 @@ export default {
       cipher.finish();
       const encryptedData = forge.util.encode64(iv+cipher.output.getBytes())
       const dataPost = encryptedData
-      console.log(encryptedData)
-
+      console.log(dataPost)
       try {
-        const response = await axios.post('http://localhost:8080/api/auth/', dataPost);
+          const response=await axios.post("http://localhost:8080/api/auth",dataPost)
+        const encryptedData2 = response.data;
 
-        // Obtener el IV (Initialization Vector) y los datos encriptados de la respuesta
-        const iv = forge.util.decode64(response.data.iv);
-        const encryptedData = forge.util.decode64(response.data.encryptedData);
+        // Decodificar la cadena encriptada desde base64
+        const decodedEncryptedData = forge.util.decode64(encryptedData2);
 
-        // Crear un objeto decipher utilizando la clave secreta y el IV
+        // Extraer el IV y los datos encriptados de la cadena
+        const iv2 = decodedEncryptedData.slice(0, 16); // Suponiendo que el IV es de 16 bytes
+        const encryptedBytes = decodedEncryptedData.slice(16);
+
+        // Crear un objeto Buffer para los bytes encriptados
+        const encryptedBuffer = forge.util.createBuffer(encryptedBytes, 'raw');
+
+        // Crear un descifrador
         const decipher = forge.cipher.createDecipher('AES-CBC', secretKey);
-        decipher.start({iv});
 
-        // Actualizar el objeto decipher con los datos encriptados
-        decipher.update(forge.util.createBuffer(encryptedData));
+        // Establecer el IV
+        decipher.start({ iv: iv2 });
 
-        // Finalizar el proceso de descifrado
-        decipher.finish();
-        // Obtener los datos desencriptados como una cadena
-        const decryptedDataString = decipher.output.toString();
+        // Actualizar el descifrador con los datos encriptados
+        decipher.update(encryptedBuffer);
 
-        // Convertir los datos desencriptados a un objeto JSON
-        const decryptedDataObject = JSON.parse(decryptedDataString);
-
-        // Manejar los datos desencriptados según sea necesario
-        console.log('Datos desencriptados:', decryptedDataObject.data);
-        if (decryptedDataObject) {
+        // Finalizar la operación de descifrado
+        const decryptedData = decipher.finish(); // Devuelve true si la operación fue exitosa
+        const decryptedString = decipher.output.toString('utf8');
+        console.log(decryptedString)
+        // Parsear la cadena desencriptada a JSON
+        const decryptedJson = JSON.parse(decryptedString);
+        console.log(decryptedJson)
+        if (decryptedJson) {
           await Swal.fire({
             title: '¡Bienvenido!',
-            text: `Has ingresado como ${decryptedDataObject.data}`,
+            text: `Has ingresado como ${decryptedJson.data}`,
             icon: 'success'
           });
         }
+
         // Manejar la respuesta de la API
       } catch (error) {
         await Swal.fire({
